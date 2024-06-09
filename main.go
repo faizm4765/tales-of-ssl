@@ -33,6 +33,7 @@ func main() {
 	fmt.Printf("Client got response!\n")
 	fmt.Printf("Status code of response: %d\n", resp.Status)
 
+	defer resp.Body.Close()
 	resBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Printf("Could not read response body: %s\n", err)
