@@ -7,6 +7,17 @@ import (
 	"os"
 )
 
+type required_data struct {
+	domain        string
+	serial_number string
+	country       string
+}
+
+type cert struct {
+	PrivateKey string
+	Data       required_data
+}
+
 func main() {
 	req, err := http.NewRequest(http.MethodGet, "https://hackattic.com/challenges/tales_of_ssl/problem?access_token=b3a07ea59189199a", nil)
 	if err != nil {
