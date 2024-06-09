@@ -7,15 +7,15 @@ import (
 	"os"
 )
 
-type required_data struct {
-	domain        string
-	serial_number string
-	country       string
+type RequiredFields struct {
+	Domain        string `json:"domain"`
+	Serial_number string `json:"serial_number"`
+	Country       string `json:"country"`
 }
 
-type cert struct {
-	PrivateKey string
-	Data       required_data
+type Cert struct {
+	PrivateKey string         `json:"private_key"`
+	Data       RequiredFields `json:"required_data"`
 }
 
 func main() {
