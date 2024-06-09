@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -30,8 +31,9 @@ func main() {
 		fmt.Printf("Error creating request: ", err)
 		os.Exit(1)
 	}
+
 	fmt.Printf("Client got response!\n")
-	fmt.Printf("Status code of response: %d\n", resp.Status)
+	fmt.Printf("Status code of response: %s\n", resp.Status)
 
 	defer resp.Body.Close()
 	resBody, err := ioutil.ReadAll(resp.Body)
@@ -40,7 +42,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Response body: %s \n", resBody)
-	// fmt.Printf("Response body private key: %s \n", )
-	// fmt.Printf("Response body required data: %s \n", resBody.required_data)
+	// fmt.Printf("Response body: %s \n", resBody)
+	var cert Cert
+	err = json.Unmarshal(resBody, &cert)
+	if err != nil {
+		fmt.Printf("Error unmarshalling json %s: \n", err)
+		os.Exit(1)
+	}
+
+	// fmt.Println("Cert private key:", cert.PrivateKey)
+	fmt.Println("Cert domain input:", cert.Data.Domain)
+	fmt.Println("Cert country input:", cert.Data.Country)
 }
