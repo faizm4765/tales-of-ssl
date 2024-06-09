@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -19,5 +20,15 @@ func main() {
 		os.Exit(1)
 	}
 	fmt.Printf("Client got response!\n")
-	fmt.Printf("Status code of response: ", resp.Status)
+	fmt.Printf("Status code of response: %d\n", resp.Status)
+
+	resBody, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("Could not read response body: %s\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Response body: %s \n", resBody)
+	// fmt.Printf("Response body private key: %s \n", )
+	// fmt.Printf("Response body required data: %s \n", resBody.required_data)
 }
