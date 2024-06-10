@@ -1,6 +1,7 @@
 package main
 
 import (
+	"datamodel"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -32,7 +33,7 @@ func main() {
 	}
 
 	// fmt.Printf("Response body: %s \n", resBody)
-	var cert Cert
+	var cert datamodel.Cert
 	err = json.Unmarshal(resBody, &cert)
 	if err != nil {
 		fmt.Printf("Error unmarshalling json %s: \n", err)

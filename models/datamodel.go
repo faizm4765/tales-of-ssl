@@ -1,4 +1,4 @@
-package main
+package datamodel
 
 type RequiredFields struct {
 	Domain        string `json:"domain"`
