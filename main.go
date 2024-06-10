@@ -8,17 +8,6 @@ import (
 	"os"
 )
 
-type RequiredFields struct {
-	Domain        string `json:"domain"`
-	Serial_number string `json:"serial_number"`
-	Country       string `json:"country"`
-}
-
-type Cert struct {
-	PrivateKey string         `json:"private_key"`
-	Data       RequiredFields `json:"required_data"`
-}
-
 func main() {
 	req, err := http.NewRequest(http.MethodGet, "https://hackattic.com/challenges/tales_of_ssl/problem?access_token=b3a07ea59189199a", nil)
 	if err != nil {
