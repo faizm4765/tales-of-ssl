@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"hello/models"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
+	"os/exec"
 )
 
 func main() {
@@ -32,7 +34,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	// fmt.Printf("Response body: %s \n", resBody)
+	fmt.Printf("Response body: %s \n", resBody)
 	var cert models.Cert
 	err = json.Unmarshal(resBody, &cert)
 	if err != nil {
@@ -40,7 +42,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	// fmt.Println("Cert private key:", cert.PrivateKey)
+	fmt.Println("Private key: ", cert.PrivateKey)
+	fmt.Println("Cert domain serial number:", cert.Data.Serial_number)
 	fmt.Println("Cert domain input:", cert.Data.Domain)
 	fmt.Println("Cert country input:", cert.Data.Country)
+
+	out, err := exec.Command("openssl", "help").Output()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(out))
 }
