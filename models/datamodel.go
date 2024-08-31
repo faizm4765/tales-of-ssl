@@ -10,3 +10,7 @@ type Cert struct {
 	PrivateKey string         `json:"private_key"`
 	Data       RequiredFields `json:"required_data"`
 }
+
+type Solution struct {
+	Certificate []byte `json:"certificate"`
+}
