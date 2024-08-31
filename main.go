@@ -95,7 +95,7 @@ func main() {
 
 	fmt.Println(certDER.Raw)
 	var solution models.Solution
-	err = json.Unmarshal(certDER, &solution)
+	err = json.Unmarshal(certDER, &solution) // fix error here
 	if err != nil {
 		fmt.Println("Error unmarshaling JSON:", err)
 	}
