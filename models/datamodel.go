@@ -12,5 +12,5 @@ type Cert struct {
 }
 
 type Solution struct {
-	Certificate []byte `json:"certificate"`
+	Certificate string `json:"certificate"`
 }
